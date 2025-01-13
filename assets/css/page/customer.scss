@@ -1,0 +1,364 @@
+@charset 'utf-8';
+@use '@css/abstracts' as *;
+
+.card-area {
+  margin: rem(140px) 0 rem(60px);
+  @include gridAuto(rem(250px));
+  gap: rem(100px) rem(56px);
+
+  @include tablet {
+    margin: rem(80px) 0 rem(40px);
+    gap: rem(56px);
+  }
+
+  @include tablet-sm {
+    margin: rem(30px) 0;
+    gap: rem(24px);
+  }
+}
+
+.card {
+  display: block;
+  padding: rem(24px) rem(30px) rem(34px);
+  background-color: $c-white;
+  border: 1px solid $c-border;
+  border-radius: rem(24px);
+  overflow: hidden;
+  transition: $duration;
+
+  &:hover {
+    border: 1px solid rgba($color: $c-border, $alpha: 0.75);
+    box-shadow: 0px 4px 20px 4px rgba(75, 73, 88, 0.1);
+  }
+
+  &__wrap {
+    position: relative;
+    height: 100%;
+  }
+
+  &__header {
+    &--num {
+      color: $c-primary;
+      font-size: rem(24px);
+      font-weight: 600;
+
+      @include tablet-sm {
+        font-size: rem(20px);
+      }
+    }
+
+    &--title {
+      font-size: rem(24px);
+      font-weight: 600;
+
+      @include tablet-sm {
+        font-size: rem(18px);
+      }
+    }
+  }
+
+  &__body {
+    margin-top: rem(4px);
+    color: $c-text-grey;
+    line-height: 1.6;
+
+    @include tablet-sm {
+      margin-top: rem(18px);
+      font-size: rem(14px);
+    }
+  }
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  gap: rem(88px);
+
+  @include laptop {
+    gap: rem(56px);
+  }
+
+  @include tablet-sm {
+    flex-direction: column;
+  }
+
+  &__text {
+    flex: 1;
+    padding-top: rem(24px);
+
+    @include tablet-sm {
+      padding-top: 0;
+    }
+  }
+
+  &__img {
+    flex: 1;
+    @include flexCenter;
+
+    img {
+      width: 100%;
+      border-radius: rem(24px);
+      overflow: hidden;
+    }
+  }
+
+  &__title {
+    @include flexCenter;
+    gap: rem(8px);
+
+    &--text {
+      font-size: rem(30px);
+      font-weight: 700;
+    }
+  }
+
+  &__desc {
+    margin-top: rem(32px);
+    color: $c-text-grey;
+    font-size: rem(18px);
+    font-weight: 500;
+
+    @include mobile {
+      font-size: rem(16px);
+    }
+  }
+}
+
+.full-color {
+  margin-bottom: rem(60px);
+  padding: rem(80px) rem(68px) rem(100px);
+  background: rgb(59, 166, 247);
+  background: linear-gradient(rgba(59, 166, 247, 1) 0%, rgba(71, 105, 233, 1) 100%);
+
+  @include tablet {
+    padding: rem(80px) rem(40px) rem(100px);
+  }
+
+  @include tablet-sm {
+    margin-bottom: rem(40px);
+    padding: rem(60px) rem(40px) rem(60px);
+  }
+
+  @include mobile {
+    margin-bottom: rem(24px);
+  }
+}
+
+.result {
+  width: 90%;
+  margin: 0 auto;
+  padding: rem(16px) rem(80px);
+  color: $c-white;
+
+  @include laptop {
+    width: 100%;
+    padding: rem(16px) rem(60px);
+  }
+
+  @include tablet {
+    padding: rem(16px) rem(40px);
+  }
+
+  @include mobile {
+    padding: 0;
+  }
+
+  &__title {
+    margin-bottom: rem(60px);
+    font-size: rem(40px);
+    font-weight: 600;
+    text-align: center;
+
+    @include tablet {
+      margin-bottom: rem(40px);
+      font-size: rem(32px);
+    }
+
+    @include tablet-sm {
+      font-size: rem(24px);
+    }
+  }
+
+  &__area {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(rem(278px), auto));
+    gap: rem(34px);
+    color: $c-secondary;
+
+    @include tablet-sm {
+      gap: rem(24px);
+    }
+  }
+
+  &__box {
+    padding: rem(32px) rem(40px);
+    align-content: center;
+    text-align: center;
+    background: rgba($color: $c-white, $alpha: 0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    @include shadow03;
+    border: 1px solid rgba($color: $c-white, $alpha: 0.3);
+    border-radius: rem(12px);
+
+    @include tablet-sm {
+      padding: rem(24px) rem(32px);
+    }
+
+    &--text {
+      font-size: rem(24px);
+      font-weight: 500;
+
+      @include tablet {
+        font-size: rem(22px);
+      }
+    }
+
+    &--num {
+      font-size: rem(56px);
+      font-weight: 800;
+
+      @include tablet {
+        font-size: rem(40px);
+      }
+    }
+  }
+}
+
+.challenge {
+  font-size: rem(18px);
+
+  @include tablet-sm {
+    font-size: rem(14px);
+  }
+
+  &__text {
+    &:not(first-child) {
+      margin-top: rem(24px);
+    }
+  }
+}
+
+.box-area {
+  width: 90%;
+  margin: rem(80px) auto;
+  padding: rem(56px) rem(80px);
+  color: $c-white;
+  background: rgb(59, 166, 247);
+  background: linear-gradient(90deg, rgba(59, 166, 247, 1) 0%, rgba(71, 105, 233, 1) 100%);
+  border-radius: rem(40px);
+
+  @include tablet-sm {
+    padding: rem(40px) rem(56px);
+    border-radius: rem(24px);
+  }
+
+  @include mobile {
+    margin: 0 auto;
+    padding: rem(40px) rem(32px);
+    border-radius: rem(24px);
+  }
+
+  &__title {
+    margin-bottom: rem(24px);
+    font-size: rem(24px);
+    font-weight: 500;
+    text-align: center;
+
+    @include tablet-sm {
+      font-size: rem(20px);
+    }
+
+    @include mobile {
+      font-size: rem(18px);
+    }
+  }
+
+  &__text {
+    font-size: rem(18px);
+    line-height: 1.6;
+
+    @include tablet-sm {
+      font-size: rem(16px);
+    }
+
+    @include mobile {
+      font-size: rem(14px);
+      line-height: 1.4;
+    }
+  }
+}
+
+.benefits {
+  margin-top: rem(100px);
+
+  @include tablet-sm {
+    margin-top: rem(40px);
+  }
+
+  &__list {
+    position: relative;
+    padding-left: rem(26px);
+    counter-increment: number 01;
+
+    &:not(:first-child) {
+      margin-top: rem(100px);
+
+      @include tablet {
+        margin-top: rem(80px);
+      }
+
+      @include tablet-sm {
+        margin-top: rem(56px);
+      }
+    }
+  }
+
+  &__title {
+    $bgStart: rgba(
+      $color: #486aea,
+      $alpha: 0.5,
+    );
+
+    $bgEnd: rgba(
+      $color: #3ca6f8,
+      $alpha: 0.5,
+    );
+
+    display: inline;
+    position: relative;
+    font-size: rem(28px);
+    font-weight: 600;
+    background-image: linear-gradient(to right, $bgStart 0%, $bgEnd 68%);
+    background-repeat: no-repeat;
+    background-size: 0 35%;
+    background-position: 0 bottom;
+    transition: background-size 0.8s;
+
+    @include tablet {
+      font-size: rem(24px);
+    }
+
+    @include tablet-sm {
+      font-size: rem(18px);
+    }
+
+    &.is-active {
+      background-size: 100% 35%;
+
+      @include mobile {
+        background-size: 100% 30%;
+      }
+    }
+  }
+
+  &__desc {
+    margin-top: rem(16px);
+    font-size: rem(18px);
+    color: $c-text-grey;
+
+    @include tablet-sm {
+      font-size: rem(14px);
+    }
+  }
+}

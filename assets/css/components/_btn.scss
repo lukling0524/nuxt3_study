@@ -1,0 +1,117 @@
+@charset 'utf-8';
+@use '@css/abstracts' as *;
+
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: rem(8px) rem(24px);
+  color: $c-white;
+  font-size: rem(16px);
+  font-weight: 600;
+  line-height: 1.4;
+  border-radius: 100px;
+  transition: background-color $duration;
+  overflow: hidden;
+  cursor: pointer;
+
+  @include mobile {
+    font-size: rem(14px);
+  }
+
+  &__lg {
+    font-size: rem(18px);
+    padding: rem(12px) rem(32px);
+
+    @include mobile {
+      font-size: rem(16px);
+      padding: rem(10px) rem(28px);
+    }
+  }
+
+  &__text {
+    position: relative;
+    z-index: 1;
+  }
+
+  &::before {
+    @include pseudo('', 0, 100%);
+    background: linear-gradient(to right, #486aea 0%, #3ca6f8 68%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100px;
+    opacity: 0.5;
+    transition: 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    &::before {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  &__blue {
+    background-color: $c-primary;
+
+    &::before {
+      background: lighten($color: $c-primary, $amount: 10%);
+    }
+  }
+
+  &__navy {
+    background-color: $c-secondary;
+
+    &::before {
+      background: lighten($color: $c-secondary, $amount: 25%);
+    }
+  }
+
+  &__white {
+    color: $c-text-black;
+    background-color: $c-white;
+    font-weight: 800;
+
+    // &:hover {
+    //   color: $c-white;
+    // }
+
+    &::before {
+      background: transparent;
+    }
+  }
+
+  &:disabled,
+  &[disabled] {
+    color: $c-white !important;
+    background-color: $c-disabled !important;
+    border-color: $c-disabled !important;
+    cursor: not-allowed;
+  }
+}
+
+.btn-more {
+  margin-top: rem(24px);
+  padding-right: rem(36px);
+  color: $c-text-grey;
+  font-weight: 400;
+  background-position: center right rem(12px);
+  background-repeat: no-repeat;
+  background-image: icon(linkArrow, $c-text-grey);
+  border: 1px solid $c-border;
+  transition: $duration;
+
+  @include tablet-sm {
+    margin-top: rem(16px);
+  }
+
+  &:hover {
+    background-position: center right rem(8px);
+  }
+
+  &::before {
+    background: rgba($color: $c-border, $alpha: 0.3);
+  }
+}

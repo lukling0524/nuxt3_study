@@ -1,0 +1,160 @@
+@charset 'utf-8';
+@use '@css/abstracts' as *;
+
+$footerListMargin: rem(8px);
+
+.footer {
+  $footerGap: rem(16px);
+
+  @include flexCenter(center);
+  padding: rem(64px) $commonSpaceLR;
+  background-color: #f9fafb;
+  border-top: 1px solid $c-border;
+
+  @include tablet-sm {
+    padding: rem(64px) $commonSpaceLRMobile;
+  }
+
+  &__wrap {
+    width: 100%;
+    max-width: $commonSectionMaxWidth;
+    display: flex;
+
+    @include tablet {
+      flex-direction: column;
+      gap: rem(32px);
+    }
+  }
+
+  &__logo {
+    flex: 1;
+
+    &--img {
+      background-image: logo(logoSVG, #a6a7ac, #a6a7ac);
+    }
+  }
+
+  &__info {
+    flex: 1;
+
+    display: flex;
+    gap: rem(44px);
+
+    @include laptop {
+      flex-direction: column;
+      gap: $footerListMargin;
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: flex-start;
+    gap: $footerGap;
+
+    &:not(:first-child) {
+      margin-top: $footerListMargin;
+    }
+
+    &.reg,
+    &.add {
+      @include mobile {
+        flex-direction: column;
+        gap: rem(8px);
+
+        .footer__item {
+          &:not(.title) {
+            padding-left: rem(12px);
+
+            &::before {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    &.terms {
+      @include mobile {
+        justify-content: center;
+        margin-top: rem(32px);
+      }
+
+      @include mobile-sm {
+        flex-direction: column;
+        gap: $footerListMargin;
+      }
+    }
+  }
+
+  &__item {
+    color: rgba($color: $c-text-grey, $alpha: 0.6);
+    font-size: rem(14px);
+    font-weight: 500;
+
+    &.title {
+      color: rgba($color: $c-text-grey, $alpha: 0.8);
+    }
+
+    &:not(:first-child) {
+      position: relative;
+
+      &::before {
+        @include pseudo('', rem(1px), rem(12px));
+        position: absolute;
+        top: rem(4px);
+        left: calc(-1 * $footerGap / 2);
+        background-color: $c-border;
+
+        @include mobile-sm {
+          display: none;
+        }
+      }
+    }
+
+    &.link {
+      color: rgba($color: $c-text-grey, $alpha: 0.8);
+      line-height: 1.5;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+html[lang='en'] {
+  .footer {
+    &__info {
+      display: block;
+    }
+
+    &__info-wrap {
+      &:not(:first-child) {
+        margin-top: $footerListMargin;
+      }
+    }
+
+    &__item {
+      &.title {
+        color: rgba($color: $c-text-grey, $alpha: 0.8);
+      }
+
+      &::before {
+        @include mobile {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .salesNo {
+    display: none;
+  }
+
+  .terms {
+    @include mobile {
+      flex-direction: column;
+      gap: $footerListMargin;
+    }
+  }
+}

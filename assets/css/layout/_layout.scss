@@ -1,0 +1,57 @@
+@charset 'utf-8';
+@use '@css/abstracts' as *;
+
+#wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: rem(80px) $commonSpaceLR rem(140px);
+
+  @include tablet-sm {
+    padding: rem(48px) $commonSpaceLRMobile rem(100px);
+  }
+}
+
+.section {
+  width: 100%;
+  max-width: $commonSectionMaxWidth;
+
+  &__title-box {
+    margin-bottom: rem(56px);
+  }
+
+  &__title {
+    font-size: rem(40px);
+    font-weight: 700;
+
+    @include tablet {
+      font-size: rem(32px);
+    }
+
+    @include tablet-sm {
+      font-size: rem(24px);
+    }
+  }
+
+  &__desc {
+    margin-top: rem(20px);
+    color: $c-text-grey;
+  }
+
+  & + & {
+    margin-top: rem(140px);
+
+    @include tablet-sm {
+      margin-top: rem(80px);
+    }
+  }
+}

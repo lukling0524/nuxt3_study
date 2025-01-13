@@ -1,0 +1,146 @@
+@charset 'utf-8';
+@use '@css/abstracts' as *;
+
+.mobile-header {
+  width: 100%;
+  height: $headerMobile;
+  position: fixed;
+  top: 0;
+  @include flexCenter(space-between);
+  padding: $headerPadding $commonSpaceLR;
+  z-index: 100;
+
+  @include tablet-sm {
+    padding: $headerPadding $commonSpaceLRMobile;
+  }
+
+  // 스크롤 시 고정 헤더 스타일
+  &.fixed {
+    background-color: $c-white;
+    @include shadow03;
+    transition: 0.4s;
+
+    .mobile-header {
+      &__logo--img {
+        background-image: logo(logoSVG);
+      }
+
+      &__item {
+        color: $c-text-black;
+        transition: $duration;
+      }
+
+      &__hamburger {
+        .line {
+          background-color: #393939;
+        }
+      }
+    }
+  }
+
+  // 모바일 헤더 오픈
+  &.is-open {
+    background-color: $c-white;
+    border-bottom: rem(1px) solid $c-border;
+
+    .mobile-header {
+      &__logo--img {
+        background-image: logo(logoSVG);
+      }
+
+      &__hamburger {
+        .line {
+          background-color: $c-text-black;
+
+          &:nth-child(1) {
+            transform: translateY(rem(7px)) rotate(46deg);
+          }
+
+          &:nth-child(2) {
+            opacity: 0;
+          }
+
+          &:nth-child(3) {
+            transform: translateY(rem(-9px)) rotate(-46deg);
+
+            @include safari-pc {
+              transform: translateY(rem(-7px)) rotate(-46deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__wrap {
+    width: 100%;
+    @include flexCenter(space-between);
+  }
+
+  &__logo {
+    @include flexCenter;
+    cursor: pointer;
+
+    &--img {
+      display: block;
+      background-image: logo(logoSVG, $c-white, $c-white);
+      transition: $duration;
+    }
+  }
+
+  &__hamburger {
+    $hamburger: &;
+
+    width: rem(26px);
+    height: rem(18px);
+    transition: $duration;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    @include safari-pc {
+      display: block;
+      flex-direction: unset;
+
+      .line + .line {
+        margin-top: rem(5px);
+      }
+    }
+
+    .line {
+      display: block;
+      width: 100%;
+      height: rem(2px);
+      background-color: $c-white;
+      transition: 0.3s;
+    }
+  }
+}
+
+.contact-btn {
+  width: 100%;
+  margin-bottom: rem(32px);
+  padding: rem(12px);
+  text-align: center;
+  font-size: rem(16px);
+  background: linear-gradient(to right, #486aea 0%, #3ca6f8 68%);
+
+  &::before {
+    background: transparent;
+  }
+}
+
+.language {
+  @include flexCenter(flex-end);
+  gap: rem(24px);
+  margin-top: rem(32px);
+
+  &__item {
+    padding: rem(8px) rem(24px);
+    font-size: rem(14px);
+    color: #222;
+    border: rem(1px) solid $c-border;
+    border-radius: rem(12px);
+  }
+}

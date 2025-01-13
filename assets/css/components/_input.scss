@@ -1,0 +1,318 @@
+@charset 'utf-8';
+@use '@css/abstracts' as *;
+
+// component reset
+label {
+  font-size: rem(14px);
+  line-height: 1.3;
+}
+
+input,
+textarea {
+  &:read-only {
+    background-color: rgba($color: $c-border, $alpha: 0.3);
+  }
+}
+
+input,
+textarea,
+select,
+.select {
+  min-width: rem(100px);
+  min-height: rem(34px);
+  padding: rem(12px) rem(16px);
+  font-size: rem(15px);
+  background-color: $c-bg;
+  border: 1px solid transparent;
+  border-radius: rem(6px);
+  transition: $duration;
+  @include ellipsis;
+
+  &::placeholder {
+    color: $c-border;
+  }
+
+  &:focus {
+    outline: 0;
+    border-color: $c-primary;
+  }
+
+  &:read-only {
+    &:focus {
+      border-color: $c-border;
+      cursor: default;
+    }
+  }
+
+  &:disabled {
+    padding: rem(8px) rem(16px);
+    color: $c-disabled;
+    border: 1px solid $c-border;
+  }
+}
+
+select,
+.select {
+  padding-right: rem(34px);
+  line-height: rem(16px);
+  background-position: center right rem(8px);
+  background-repeat: no-repeat;
+  background-image: icon(selectArrow, $c-text-grey);
+
+  &:read-only:focus {
+    outline: 0;
+    border-color: $c-primary;
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: 1;
+    background-image: icon(selectArrow, $c-disabled);
+  }
+}
+
+textarea {
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-y: auto;
+  resize: none;
+
+  &:focus {
+    border-color: transparent;
+  }
+}
+
+.textarea-wrap {
+  border: 1px solid transparent;
+  border-radius: rem(6px);
+  transition: $duration;
+
+  &:has(textarea:focus) {
+    border-color: $c-primary;
+  }
+}
+
+// selectbox 디자인 커스텀
+.select__wrap {
+  position: relative;
+  font-size: rem(14px);
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+    border-color: $c-primary;
+  }
+
+  &.disabled {
+    color: $c-disabled;
+    cursor: default;
+  }
+
+  &.is-open {
+    .select {
+      border-color: $c-primary;
+    }
+  }
+
+  .option {
+    $padding: rem(14px);
+
+    width: 100%;
+    position: absolute;
+    top: rem(40px);
+    right: 0;
+    padding: $padding rem(10px) $padding rem(16px);
+    background-color: $c-white;
+    @include shadow03;
+    border-radius: rem(12px);
+    z-index: 10;
+
+    &__wrap {
+      max-height: calc(500px - ($padding * 2));
+      padding-right: rem(6px);
+      overflow: auto;
+      @include scrollbar(4px);
+    }
+
+    &__item {
+      width: 100%;
+      padding: rem(6px) rem(8px);
+      color: $c-text-grey;
+      text-align: left;
+      font-size: rem(14px);
+      font-weight: 500;
+      border-radius: rem(6px);
+
+      &:hover {
+        background-color: rgba($color: $c-primary, $alpha: 0.1);
+        transition: none;
+      }
+    }
+  }
+}
+
+@mixin label {
+  font-size: rem(15px);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.input {
+  &__label {
+    @include label;
+  }
+}
+
+.checkbox-container,
+.radio-container {
+  display: flex;
+  gap: rem(32px);
+}
+
+.checkbox-wrap,
+.radio-wrap {
+  min-height: rem(20px);
+
+  & + & {
+    margin-left: rem(32px);
+  }
+}
+
+// 체크박스
+.checkbox {
+  $checkbox: &;
+  $size: rem(20px);
+
+  &__input {
+    display: none;
+  }
+
+  &__label {
+    position: relative;
+    padding-left: $size + rem(12px);
+    @include label;
+    cursor: pointer;
+
+    &.no-text {
+      padding-left: $size;
+    }
+
+    #{$checkbox}__input:disabled + & {
+      color: $c-disabled;
+      cursor: not-allowed;
+    }
+
+    &::after {
+      @include pseudo('', $size, $size);
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $c-white;
+      border-radius: rem(4px);
+      border: 1px solid $c-border;
+      transition: $duration;
+
+      #{$checkbox}__input:checked + & {
+        border-color: $c-primary;
+        background-color: $c-primary;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath stroke='%23fff' stroke-miterlimit='10' stroke-width='2' d='m3.168 8.514 4.346 4.346 7.32-7.32'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M.25.45h17.5v17.5H.25z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      #{$checkbox}__input:checked:disabled + & {
+        border-color: $c-disabled;
+        background-color: $c-disabled;
+      }
+    }
+  }
+}
+
+// 라디오버튼
+.radio {
+  $radio: &;
+  $size: rem(20px);
+
+  &__input {
+    display: none;
+  }
+
+  &__label {
+    position: relative;
+    padding-left: $size + rem(12px);
+    @include label;
+    cursor: pointer;
+
+    #{$radio}__input:disabled + & {
+      color: $c-disabled;
+      cursor: not-allowed;
+    }
+
+    &::before {
+      @include pseudo('', $size, $size);
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $c-white;
+      border-radius: 100%;
+      border: 1px solid $c-border;
+      transition: $duration;
+
+      #{$radio}__input:checked + & {
+        border-color: $c-primary;
+      }
+
+      #{$radio}__input:checked:disabled + & {
+        border-color: $c-disabled;
+      }
+    }
+
+    &::after {
+      $size: rem(10px);
+
+      @include pseudo('', $size, $size);
+      position: absolute;
+      top: calc($size/2);
+      left: calc($size/2);
+      background-color: transparent;
+      border-radius: 100%;
+      transition: $duration;
+
+      #{$radio}__input:checked + & {
+        background-color: $c-primary;
+      }
+
+      #{$radio}__input:checked:disabled + & {
+        background-color: $c-disabled;
+      }
+    }
+  }
+}
+
+// input component style
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  gap: rem(12px);
+
+  &.vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: rem(4px);
+  }
+}
+
+.input-slot {
+  width: 100%;
+  display: flex;
+  gap: rem(8px);
+  flex: 1;
+
+  input,
+  select,
+  .select__wrap {
+    flex: 1;
+  }
+}

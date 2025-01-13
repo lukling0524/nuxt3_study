@@ -1,0 +1,21 @@
+@charset 'utf-8';
+@use '@css/abstracts' as *;
+
+.terms {
+  &:not(:first-child) {
+    margin-top: rem(40px);
+  }
+
+  &__title {
+    font-size: rem(24px);
+    font-weight: 600;
+  }
+
+  &__desc {
+    margin-top: rem(16px);
+  }
+
+  // &__list{
+  //   padding-left: ;
+  // }
+}

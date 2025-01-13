@@ -1,0 +1,56 @@
+@use '@css/abstracts/functions' as *;
+
+// =========================
+// == variables (global)
+// =========================
+
+// =========================
+// == Font
+// =========================
+$font:
+  'Pretendard Variable',
+  Pretendard,
+  -apple-system,
+  BlinkMacSystemFont,
+  system-ui,
+  Roboto,
+  'Helvetica Neue',
+  'Segoe UI',
+  'Apple SD Gothic Neo',
+  'Noto Sans KR',
+  'Malgun Gothic',
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol',
+  sans-serif;
+
+// =========================
+// == Colors
+// =========================
+$c-text-black: #222222;
+$c-text-grey: #6b6c75;
+$c-border: #dadde5;
+$c-white: #ffffff;
+$c-bg: #fafafc;
+$c-primary: #336dff;
+$c-secondary: #19284e;
+$c-accent: #33f3ff;
+$c-disabled: #acacb5;
+$c-symbol: #4472c2;
+
+// =========================
+// == Transition duration
+// =========================
+$duration: 0.3s;
+
+// =========================
+// == size & space
+// =========================
+$headerHeight: rem(62px);
+$openedHeaderHeight: rem(320px);
+$headerMobile: rem(50px);
+$headerPadding: rem(12px);
+$commonSectionMaxWidth: rem(1280px);
+$commonSpaceLR: rem(60px);
+$commonSpaceLRMobile: rem(32px);
+$mainPageSectionSpace: rem(60px);
