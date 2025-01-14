@@ -1,5 +1,5 @@
 <template>
 	<HomeMainVisual />
-	<HomeMainCustomer />
-	<HomeMainFunction />
+	<!-- <HomeMainCustomer /> -->
+	<!-- <HomeMainFunction /> -->
 </template>
