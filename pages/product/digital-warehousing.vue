@@ -1,3 +1,3 @@
 <template>
-	<div>about page</div>
+	<p>product 하위</p>
 </template>

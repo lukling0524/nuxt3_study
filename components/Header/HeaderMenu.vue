@@ -1,10 +1,10 @@
 <template>
 	<nav class="nav">
 		<div class="nav__item" v-for="(item, idx) in menuList" :key="idx">
-			<router-link class="header__item nav__main" :class="{ 'crnt-root': $route.meta.root === item.root }" :to="item.path">{{ item.title }}</router-link>
+			<NuxtLink class="header__item nav__main" :class="{ 'crnt-root': $route.meta.root === item.root }" :to="item.path">{{ item.title }}</NuxtLink>
 			<ul class="nav__sub" v-if="item.subMenu">
 				<li class="nav__sub--list" v-for="(subItem, subIdx) in item.subMenu" :key="subIdx">
-					<router-link class="nav__sub--item" :to="subItem.path">{{ subItem.title }}</router-link>
+					<NuxtLink class="nav__sub--item" :to="subItem.path">{{ subItem.title }}</NuxtLink>
 				</li>
 			</ul>
 		</div>
@@ -13,7 +13,6 @@
 
 <script setup>
 	import { computed } from 'vue';
-	import { useI18n } from '@nuxtjs/i18n';
 
 	const { t } = useI18n();
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="main-visual">
+	<div class="main-visual" :key="$route.fullPath">
 		<video class="main-visual__vid" src="/assets/images/main_visual.mp4" muted autoplay loop></video>
 		<div class="main-visual__layer"></div>
 
@@ -18,12 +18,54 @@
 </template>
 
 <script setup>
-	// import { useI18n } from 'vue-i18n';
-	const { t } = useI18n();
+	const beforeEnter = el => {
+		// 트랜지션 시작 전에 초기 상태 설정
+		el.style.transform = 'translateX(-100px)';
+		el.style.opacity = '0';
+	};
+
+	const afterLeave = el => {
+		// 트랜지션 종료 후 상태 초기화
+		el.style.transform = '';
+		el.style.opacity = '';
+	};
 </script>
 
 <style lang="scss" scoped>
 	@use '@css/abstracts' as *;
+
+	// transition style
+	.mainVisualSub-enter-from,
+	.mainVisualTitle-enter-from,
+	.mainVisualDesc-enter-from {
+		transform: translateX(rem(-100px));
+		opacity: 0;
+	}
+
+	.mainVisualSub-enter-active,
+	.mainVisualTitle-enter-active,
+	.mainVisualDesc-enter-active {
+		transition: 1s cubic-bezier(0.5, 1, 0.89, 1);
+	}
+
+	$delay: 0.2s;
+
+	.mainVisualSub-enter-active {
+		transition-delay: $delay;
+	}
+	.mainVisualTitle-enter-active {
+		transition-delay: $delay * 2;
+	}
+	.mainVisualDesc-enter-active {
+		transition-delay: $delay * 3;
+	}
+
+	.mainVisualSub-enter-to,
+	.mainVisualTitle-enter-to,
+	.mainVisualDesc-enter-to {
+		transform: translateX(0);
+		opacity: 1;
+	}
 
 	.main-visual {
 		position: relative;

@@ -1,7 +1,6 @@
 <template>
 	<div id="wrap">
 		<HeaderComponent />
-		<HeaderSub />
 		<slot></slot>
 		<CommonTheFooter />
 	</div>
