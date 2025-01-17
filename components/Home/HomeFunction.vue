@@ -22,8 +22,8 @@
 
 <script setup>
 	import { computed, onMounted } from 'vue';
-	import gsap from 'gsap';
-	import ScrollTrigger from 'gsap/ScrollTrigger';
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	// import ButtonComponent from '@/components/common/ButtonComponent.vue';
 	// import { useI18n } from 'vue-i18n';
 	// import { useNavigation } from '@/utils/router';

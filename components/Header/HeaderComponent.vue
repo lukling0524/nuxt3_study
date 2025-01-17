@@ -55,7 +55,7 @@
 
 	onUnmounted(() => {
 		window.removeEventListener('scroll', handleScroll);
-		window.addEventListener('resize', handleScroll);
+		window.removeEventListener('resize', handleScroll);
 	});
 
 	// nav영역에 mouse hover 👉 mega menu open

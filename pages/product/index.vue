@@ -22,10 +22,14 @@
 			</div>
 		</div>
 	</div>
-	<!-- <BannerComponent /> -->
 </template>
 
 <script setup>
+	import { ref, computed, onMounted } from 'vue';
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { sectionTitleAndDescAnimation } from '@/composables/animation';
+
 	definePageMeta({
 		root: 'product',
 		header: 'product',
@@ -39,9 +43,8 @@
 	useHead({
 		title: `${t('metaText.title')}${route.meta.title}`,
 		meta: [
-			{ name: 'description', content: t('metaText.description') },
-			{ name: 'keywords', content: t('metaText.keywords') },
-			{ property: 'og:description', content: t('metaText.description') },
+			{ name: 'description', content: '루벤티스의 SaaS WMS, StockFlow 입니다.' },
+			{ property: 'og:title', content: `${t('metaText.title')}${route.meta.title}` },
 		],
 	});
 
@@ -57,6 +60,34 @@
 		isHovered.value = false;
 		currentIndex.value = null;
 	};
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	onMounted(() => {
+		sectionTitleAndDescAnimation();
+
+		// card element animation
+		function createCardAnimation(triggerEl) {
+			return gsap
+				.timeline({
+					scrollTrigger: {
+						trigger: `.card-area .card:nth-child(${triggerEl})`,
+						start: 'top 85%',
+						end: 'bottom bottom',
+						markers: false,
+						invalidateOnRefresh: true,
+					},
+				})
+				.to(`.card-area .card:nth-child(${triggerEl})`, { y: 0, opacity: 1, duration: 1, delay: 0.3 });
+		}
+
+		const functionCardAnimations = [];
+
+		// products(.card) 개수만큼 반복 출력
+		for (let i = 1; i <= products.value.length; i++) {
+			functionCardAnimations.push(createCardAnimation(i.toString()));
+		}
+	});
 
 	const products = computed(() => [
 		{

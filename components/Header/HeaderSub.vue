@@ -1,11 +1,12 @@
 <template>
 	<div
+		v-if="headerInfo.page"
 		class="sub-header"
 		:style="{
-			backgroundImage: `url(/assets/images/img-header_${page}.png)`,
+			backgroundImage: `url(/assets/images/img-header_${headerInfo.page}.png)`,
 		}"
 	>
-		<h1 class="sub-header__title">{{ title }}</h1>
+		<h1 class="sub-header__title">{{ headerInfo.title }}</h1>
 	</div>
 </template>
 
@@ -13,34 +14,13 @@
 	// 현재 라우트 정보 가져오기
 	const route = useRoute();
 
-	// `meta`에서 `header`와 `title` 값을 가져오기
-	const page = ref('');
-	const title = ref('');
-
-	watch(
-		() => route.fullPath, // `fullPath`를 사용하여 라우터 상태가 변경될 때마다 추적
-		() => {
-			page.value = route.meta.header || '';
-			title.value = route.meta.title || '';
-
-			console.log(page.value);
-		},
-		{ immediate: true }, // 즉시 실행하여 처음 값을 설정
-	);
+	const headerInfo = computed(() => ({
+		page: route.meta.header || '',
+		title: route.meta.title || '',
+	}));
 </script>
 
 <style lang="scss" scoped>
-	// transition style
-	.fade-enter-active,
-	.fade-leave-active {
-		transition: opacity 5s ease;
-	}
-
-	.fade-enter-from,
-	.fade-leave-to {
-		opacity: 0;
-	}
-
 	.sub-header {
 		width: 100%;
 		height: rem(350px);

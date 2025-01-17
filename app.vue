@@ -1,16 +1,13 @@
 <template>
-	<div :class="['transition', pageEnter, pageLeave]">
-		<NuxtLayout>
-			<NuxtPage />
-		</NuxtLayout>
-	</div>
+	<NuxtLoadingIndicator />
+	<NuxtLayout>
+		<NuxtPage />
+	</NuxtLayout>
 </template>
 
 <script setup>
-	import { RouterView } from 'vue-router';
 	import { onMounted, watch } from 'vue';
 	import { useI18n } from 'vue-i18n';
-	// import { useHead } from '@vueuse/head';
 
 	// import { matchMedia } from '@/utils/matchMedia';
 
@@ -21,7 +18,6 @@
 			document.documentElement.lang = newLocale;
 		}
 
-		// meta tag 동적 생성
 		useHead({
 			htmlAttrs: { lang: newLocale },
 			title: `${t('metaText.title')} SaaS WMS는 StockFlow`,
@@ -47,23 +43,6 @@
 
 	watch(locale, newLocale => {
 		updateHtmlLang(newLocale);
-	});
-
-	import { useRoute } from 'vue-router';
-	import { ref } from 'vue';
-	import HeaderComponent from './components/Header/HeaderComponent.vue';
-
-	const route = useRoute();
-	const pageEnter = ref('');
-	const pageLeave = ref('');
-
-	watch(route, () => {
-		pageEnter.value = 'page-enter';
-		pageLeave.value = 'page-leave';
-		setTimeout(() => {
-			pageEnter.value = '';
-			pageLeave.value = '';
-		}, 500); // css animation duration과 일치해야함
 	});
 
 	// 	console.log(
