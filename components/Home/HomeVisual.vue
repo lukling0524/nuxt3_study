@@ -1,70 +1,65 @@
 <template>
-	<div class="main-visual" :key="$route.fullPath">
-		<video class="main-visual__vid" src="/assets/images/main_visual.mp4" muted autoplay loop></video>
+	<div class="main-visual">
+		<video class="main-visual__vid" src="/assets/images/main_visual.mp4" poster="/assets/images/main_visual-thumb.webp" muted autoplay loop preload="metadata"></video>
+
 		<div class="main-visual__layer"></div>
 
 		<div class="section text-box">
-			<Transition name="mainVisualTitle" appear>
-				<h1 class="text-box__title" v-html="$t('mainVisual.title')"></h1>
-			</Transition>
-			<Transition name="mainVisualSub" appear>
-				<p class="text-box__sub" v-html="$t('mainVisual.sub')"></p>
-			</Transition>
-			<Transition name="mainVisualDesc" appear>
-				<p class="text-box__desc">{{ $t('mainVisual.desc') }}</p>
-			</Transition>
+			<h1 v-if="isPageLoaded" class="text-box__title delayed-animation" v-html="t('mainVisual.title')"></h1>
+			<p v-if="isPageLoaded" class="text-box__sub delayed-animation" v-html="t('mainVisual.sub')"></p>
+			<p v-if="isPageLoaded" class="text-box__desc delayed-animation">{{ t('mainVisual.desc') }}</p>
 		</div>
 	</div>
 </template>
 
 <script setup>
-	const beforeEnter = el => {
-		// 트랜지션 시작 전에 초기 상태 설정
-		el.style.transform = 'translateX(-100px)';
-		el.style.opacity = '0';
-	};
+	import { ref, onMounted, nextTick } from 'vue';
+	const { t } = useI18n();
+	const isPageLoaded = ref(false);
 
-	const afterLeave = el => {
-		// 트랜지션 종료 후 상태 초기화
-		el.style.transform = '';
-		el.style.opacity = '';
-	};
+	console.log('마운트 전:', isPageLoaded.value);
+
+	onMounted(() => {
+		if (import.meta.env.SSR === false) {
+			setTimeout(() => {
+				isPageLoaded.value = true;
+				console.log('마운트 후:', isPageLoaded.value);
+			}, 300);
+		}
+	});
 </script>
 
 <style lang="scss" scoped>
 	@use '@css/abstracts' as *;
-
-	// transition style
-	.mainVisualSub-enter-from,
-	.mainVisualTitle-enter-from,
-	.mainVisualDesc-enter-from {
-		transform: translateX(rem(-100px));
+	.delayed-animation {
 		opacity: 0;
-	}
-
-	.mainVisualSub-enter-active,
-	.mainVisualTitle-enter-active,
-	.mainVisualDesc-enter-active {
-		transition: 1s cubic-bezier(0.5, 1, 0.89, 1);
+		transform: translateX(rem(-100px));
+		animation: fadeInMove 0.8s cubic-bezier(0.5, 1, 0.89, 1) forwards;
 	}
 
 	$delay: 0.2s;
 
-	.mainVisualSub-enter-active {
-		transition-delay: $delay;
-	}
-	.mainVisualTitle-enter-active {
-		transition-delay: $delay * 2;
-	}
-	.mainVisualDesc-enter-active {
-		transition-delay: $delay * 3;
+	.text-box__sub {
+		animation-delay: $delay;
 	}
 
-	.mainVisualSub-enter-to,
-	.mainVisualTitle-enter-to,
-	.mainVisualDesc-enter-to {
-		transform: translateX(0);
-		opacity: 1;
+	.text-box__title {
+		animation-delay: $delay * 2;
+	}
+
+	.text-box__desc {
+		animation-delay: $delay * 3;
+	}
+
+	@keyframes fadeInMove {
+		from {
+			opacity: 0;
+			transform: translateX(rem(-100px));
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	.main-visual {
@@ -94,8 +89,9 @@
 			position: absolute;
 			top: 0;
 			margin-top: -$headerHeight;
-			background-image: url('/assets/images/bg-main_visual.webp');
+			/* background-image: url('/assets/images/bg-main_visual.webp'); */
 			background-size: cover;
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='900' fill='none'%3E%3Cpath fill='url(%23a)' d='M1920 422h1920v422H1920z' opacity='.7' style='mix-blend-mode:multiply' transform='rotate(180 1920 422)'/%3E%3Cpath fill='%23000' d='M0 0h1920v900H0z' opacity='.3' style='mix-blend-mode:multiply'/%3E%3Cpath fill='url(%23b)' d='M0 478h1920v422H0z' opacity='.8' style='mix-blend-mode:multiply'/%3E%3Cpath fill='url(%23c)' d='M0 0h900v1171H0z' opacity='.9' style='mix-blend-mode:multiply' transform='matrix(0 -1 -1 0 1171 900)'/%3E%3Cdefs%3E%3ClinearGradient id='a' x1='2980' x2='2972' y1='844' y2='440' gradientUnits='userSpaceOnUse'%3E%3Cstop/%3E%3Cstop offset='1' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='1060' x2='1052' y1='900' y2='496' gradientUnits='userSpaceOnUse'%3E%3Cstop/%3E%3Cstop offset='1' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='c' x1='496.875' x2='367.193' y1='1171' y2='64.71' gradientUnits='userSpaceOnUse'%3E%3Cstop/%3E%3Cstop offset='1' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E");
 
 			@include tablet {
 				opacity: 0.9;

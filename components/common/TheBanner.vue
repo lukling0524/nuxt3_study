@@ -1,5 +1,7 @@
 <template>
 	<div class="banner">
+		<nuxt-img src="/assets/images/bg-banner.webp" format="webp" loading="lazy" class="banner__background" alt="Banner background" />
+
 		<div class="banner__text">
 			<h2 class="banner__title" v-html="t('banner.title')"></h2>
 			<h3 class="banner__desc">{{ t('banner.desc') }}</h3>
@@ -70,16 +72,28 @@
 
 <style lang="scss" scoped>
 	.banner {
+		position: relative;
 		@include flexCenter(center);
 		padding: rem(100px) $commonSpaceLRMobile;
-		background: url(/assets/images/bg-banner.webp) no-repeat center/cover;
 
 		@include tablet {
 			padding: rem(60px) $commonSpaceLRMobile;
 		}
 
+		.banner__background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			z-index: -1;
+		}
+
 		&__text {
+			position: relative;
 			text-align: center;
+			z-index: 1;
 		}
 
 		&__title {

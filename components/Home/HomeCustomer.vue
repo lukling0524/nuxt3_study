@@ -3,11 +3,22 @@
 		<h2 class="section__title text-center">{{ $t('MainCustomer.title') }}</h2>
 		<div class="box-area">
 			<div class="box-area__img">
-				<img class="img__original" :src="`/assets/images/img-main_features-${currentLang}.png`" :alt="$t('MainCustomer.alt')" />
+				<nuxt-img
+					class="img__original"
+					:src="`/assets/images/img-main_features-${currentLang}.png`"
+					:fallback="`/assets/images/img-main_features-${currentLang}.png`"
+					format="avif"
+					:alt="$t('MainCustomer.alt')"
+					loading="lazy"
+				/>
 
-				<img id="obj1" class="img__obj" src="/assets/images/img-customer-obj-1.png" alt="face object" />
-				<img id="obj2" class="img__obj" src="/assets/images/img-customer-obj-2.png" alt="face object" />
-				<img id="obj3" class="img__obj" src="/assets/images/img-customer-obj-3.png" alt="face object" />
+				<nuxt-img id="obj1" class="img__obj" src="/assets/images/img-customer-obj-1.png" fallback="/assets/images/img-customer-obj-1.png" format="avif" alt="face object" loading="lazy" />
+				<nuxt-img id="obj2" class="img__obj" src="/assets/images/img-customer-obj-2.png" fallback="/assets/images/img-customer-obj-2.png" format="avif" alt="face object" loading="lazy" />
+				<nuxt-img id="obj3" class="img__obj" src="/assets/images/img-customer-obj-3.png" fallback="/assets/images/img-customer-obj-3.png" format="avif" alt="face object" loading="lazy" />
+
+        <!-- <nuxt-img id="card1" class="img__card" :src="`/assets/images/img-customer-card-1-${currentLang}.svg`" :fallback="`/assets/images/img-customer-card-1-${currentLang}.svg`" format="avif" :alt="$t('MainCustomer.alt')" loading="lazy" />
+        <nuxt-img id="card2" class="img__card" :src="`/assets/images/img-customer-card-2-${currentLang}.svg`" :fallback="`/assets/images/img-customer-card-2-${currentLang}.svg`" format="avif" :alt="$t('MainCustomer.alt')" loading="lazy" />
+        <nuxt-img id="card3" class="img__card" :src="`/assets/images/img-customer-card-3-${currentLang}.svg`" :fallback="`/assets/images/img-customer-card-3-${currentLang}.svg`" format="avif" :alt="$t('MainCustomer.alt')" loading="lazy" /> -->
 
 				<img id="card1" class="img__card" :src="`/assets/images/img-customer-card-1-${currentLang}.svg`" :alt="$t('MainCustomer.alt')" />
 				<img id="card2" class="img__card" :src="`/assets/images/img-customer-card-2-${currentLang}.svg`" :alt="$t('MainCustomer.alt')" />

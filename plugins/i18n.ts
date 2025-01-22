@@ -14,10 +14,10 @@ export default defineNuxtPlugin(({ vueApp }) => {
 	});
 
 	// 클라이언트 사이드에서만 실행
-	if (process.client) {
+	if (import.meta.env.SSR === false) {
 		function getPreferredLanguage() {
 			const browserLang = (navigator.language || navigator.userLanguage).substr(0, 2);
-			// return ['en', 'ko'].includes(browserLang) ? browserLang : 'ko';
+			return ['en', 'ko'].includes(browserLang) ? browserLang : 'ko';
 		}
 
 		const savedLocale = localStorage.getItem('lang') || getPreferredLanguage();
