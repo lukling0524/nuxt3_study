@@ -33,4 +33,5 @@ export default defineNuxtConfig({
 	image: {
 		format: ['avif'],
 	},
+	plugins: ['@/plugins/gsap.client.js'],
 });

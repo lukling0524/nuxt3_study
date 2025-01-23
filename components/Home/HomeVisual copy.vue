@@ -1,13 +1,19 @@
 <template>
 	<div class="main-visual">
-		<video class="main-visual__vid" src="/assets/images/main_visual.mp4" poster="/assets/images/main_visual-thumb.webp" muted autoplay loop preload="metadata"></video>
+		<video class="main-visual__vid" src="/assets/images/main_visual.mp4" muted autoplay loop preload="metadata"></video>
 
 		<div class="main-visual__layer"></div>
 
 		<div class="section text-box">
-			<h1 v-if="isPageLoaded" class="text-box__title delayed-animation" v-html="t('mainVisual.title')"></h1>
-			<p v-if="isPageLoaded" class="text-box__sub delayed-animation" v-html="t('mainVisual.sub')"></p>
-			<p v-if="isPageLoaded" class="text-box__desc delayed-animation">{{ t('mainVisual.desc') }}</p>
+			<Transition name="mainVisualTitle" appear>
+				<h1 v-if="isPageLoaded" class="text-box__title" v-html="t('mainVisual.title')"></h1>
+			</Transition>
+			<Transition name="mainVisualSub" appear>
+				<p v-if="isPageLoaded" class="text-box__sub" v-html="t('mainVisual.sub')"></p>
+			</Transition>
+			<Transition name="mainVisualDesc" appear>
+				<p v-if="isPageLoaded" class="text-box__desc">{{ t('mainVisual.desc') }}</p>
+			</Transition>
 		</div>
 	</div>
 </template>
@@ -17,10 +23,13 @@
 	const { t } = useI18n();
 	const isPageLoaded = ref(false);
 
+	console.log('마운트 전:', isPageLoaded.value);
+
 	onMounted(() => {
 		if (import.meta.env.SSR === false) {
 			setTimeout(() => {
 				isPageLoaded.value = true;
+				console.log('마운트 후:', isPageLoaded.value);
 			}, 300);
 		}
 	});
@@ -28,35 +37,38 @@
 
 <style lang="scss" scoped>
 	@use '@css/abstracts' as *;
-	.delayed-animation {
-		opacity: 0;
+
+	// transition style
+	.mainVisualSub-enter-from,
+	.mainVisualTitle-enter-from,
+	.mainVisualDesc-enter-from {
 		transform: translateX(rem(-100px));
-		animation: fadeInMove 0.8s cubic-bezier(0.5, 1, 0.89, 1) forwards;
+		opacity: 0;
+	}
+
+	.mainVisualSub-enter-active,
+	.mainVisualTitle-enter-active,
+	.mainVisualDesc-enter-active {
+		transition: 1s cubic-bezier(0.5, 1, 0.89, 1);
 	}
 
 	$delay: 0.2s;
 
-	.text-box__sub {
-		animation-delay: $delay;
+	.mainVisualSub-enter-active {
+		transition-delay: $delay;
+	}
+	.mainVisualTitle-enter-active {
+		transition-delay: $delay * 2;
+	}
+	.mainVisualDesc-enter-active {
+		transition-delay: $delay * 3;
 	}
 
-	.text-box__title {
-		animation-delay: $delay * 2;
-	}
-
-	.text-box__desc {
-		animation-delay: $delay * 3;
-	}
-
-	@keyframes fadeInMove {
-		from {
-			opacity: 0;
-			transform: translateX(rem(-100px));
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
+	.mainVisualSub-enter-to,
+	.mainVisualTitle-enter-to,
+	.mainVisualDesc-enter-to {
+		transform: translateX(0);
+		opacity: 1;
 	}
 
 	.main-visual {
@@ -119,6 +131,7 @@
 			font-size: rem(60px);
 			font-weight: 700;
 			line-height: 1.3;
+			will-change: transform, opacity;
 
 			&:deep(.text-gradient) {
 				font-weight: 800;

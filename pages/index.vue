@@ -1,5 +1,5 @@
 <template>
-	<HomeVisual />
+	<!-- <HomeVisual /> -->
 	<div class="container">
 		<HomeCustomer />
 		<HomeFunction />

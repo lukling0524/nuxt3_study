@@ -13,9 +13,10 @@
 </template>
 
 <script setup>
-	import { nextTick, watch } from 'vue';
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { onMounted, nextTick, watch } from 'vue';
+	// import { gsap } from 'gsap';
+	// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	const { $gsap, $ScrollTrigger } = useNuxtApp();
 	import { useI18n } from 'vue-i18n';
 	import { useRoute } from 'vue-router';
 	import { useNavigation } from '@/composables/router';
@@ -24,42 +25,48 @@
 	const route = useRoute();
 	const { t } = useI18n();
 
-	gsap.registerPlugin(ScrollTrigger);
+	// gsap.registerPlugin(ScrollTrigger);
 
 	const initializeAnimation = () => {
-		nextTick(() => {
-			// 배너 애니메이션 트리거 제거
-			ScrollTrigger.getAll().forEach(trigger => {
-				if (trigger.vars.label === 'animation_banner') {
-					trigger.kill();
-					// console.log('---🩻🩻🩻 kill banner animation 🩻🩻🩻---');
-				}
+		if (import.meta.env.SSR === false) {
+			nextTick(() => {
+				// 배너 애니메이션 트리거 제거
+				$ScrollTrigger.getAll().forEach(trigger => {
+					if (trigger.vars.label === 'animation_banner') {
+						trigger.kill();
+						// console.log('---🩻🩻🩻 kill banner animation 🩻🩻🩻---');
+					}
+				});
+
+				const ease = 'power2.out';
+				const duration = 1.5;
+				const queue = 0.1;
+
+				// 배너 애니메이션 설정
+				$gsap
+					.timeline({
+						scrollTrigger: {
+							trigger: '.banner__text',
+							start: 'top 80%',
+							end: 'bottom bottom',
+							markers: false,
+							label: 'animation_banner',
+							invalidateOnRefresh: true,
+							// onEnter: () => {
+							//   console.log('---⭐⭐⭐ banner animation ⭐⭐⭐---');
+							// },
+						},
+					})
+					.fromTo('.banner .banner__title', { opacity: 0, ease: ease }, { opacity: 1, duration: duration }, 'queue')
+					.fromTo('.banner .banner__desc', { opacity: 0, ease: ease }, { opacity: 1, duration: duration }, `queue+=${queue}`)
+					.fromTo('.banner .btn', { opacity: 0, ease: ease }, { opacity: 1, duration: duration }, `queue+=${queue * 2}`);
 			});
-
-			const ease = 'power2.out';
-			const duration = 1.5;
-			const queue = 0.1;
-
-			// 배너 애니메이션 설정
-			gsap
-				.timeline({
-					scrollTrigger: {
-						trigger: '.banner__text',
-						start: 'top 80%',
-						end: 'bottom bottom',
-						markers: false,
-						label: 'animation_banner',
-						invalidateOnRefresh: true,
-						// onEnter: () => {
-						//   console.log('---⭐⭐⭐ banner animation ⭐⭐⭐---');
-						// },
-					},
-				})
-				.fromTo('.banner .banner__title', { opacity: 0, ease: ease }, { opacity: 1, duration: duration }, 'queue')
-				.fromTo('.banner .banner__desc', { opacity: 0, ease: ease }, { opacity: 1, duration: duration }, `queue+=${queue}`)
-				.fromTo('.banner .btn', { opacity: 0, ease: ease }, { opacity: 1, duration: duration }, `queue+=${queue * 2}`);
-		});
+		}
 	};
+
+	onMounted(() => {
+		initializeAnimation();
+	});
 
 	watch(
 		route,
