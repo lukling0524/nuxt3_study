@@ -13,7 +13,7 @@
 	const { t, locale } = useI18n();
 
 	function updateHtmlLang(newLocale) {
-		if (import.meta.env.SSR === false) {
+    if (import.meta.env.SSR === false){
 			document.documentElement.lang = newLocale;
 		}
 
@@ -33,7 +33,7 @@
 	// const { isDesktop } = matchMedia();
 
 	onMounted(() => {
-		if (import.meta.env.SSR === false) {
+		if (process.client) {
 			const savedLocale = localStorage.getItem('lang') || (navigator.language || navigator.userLanguage).substr(0, 2);
 			locale.value = savedLocale;
 			updateHtmlLang(savedLocale);

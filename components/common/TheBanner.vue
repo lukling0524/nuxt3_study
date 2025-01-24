@@ -13,11 +13,10 @@
 </template>
 
 <script setup>
-	import { onMounted, nextTick, watch } from 'vue';
-	// import { gsap } from 'gsap';
-	// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-	const { $gsap, $ScrollTrigger } = useNuxtApp();
-	//import { useI18n } from 'vue-i18n';
+	import { nextTick, watch } from 'vue';
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { useI18n } from 'vue-i18n';
 	import { useRoute } from 'vue-router';
 	import { useNavigation } from '@/composables/router';
 
