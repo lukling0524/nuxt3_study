@@ -4,7 +4,7 @@
 		<ul class="functions">
 			<li :id="`function_${idx + 1}`" class="functions__wrap" v-for="(item, idx) in functions" :key="idx">
 				<div class="functions__img">
-					<img :src="`/assets/images/img-main_func-0${idx + 1}.png`" :alt="item.title" />
+					<nuxt-img :src="`/assets/images/img-main_func-0${idx + 1}.png`" :fallback="`/assets/images/img-main_func-0${idx + 1}.png`" format="avif" :alt="item.title" loading="lazy" />
 				</div>
 				<div class="functions__text">
 					<div class="functions__title">

@@ -6,7 +6,7 @@
 				<HeaderMobileComponent v-else />
 			</template>
 			<template #fallback>
-				<MobileHeaderComponent />
+				<HeaderMobileComponent />
 			</template>
 		</ClientOnly>
 		<div :class="['transition', pageEnter, pageLeave]">

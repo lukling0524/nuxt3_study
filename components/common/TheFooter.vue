@@ -58,7 +58,7 @@
 	// const { goToTerms, goToPolicy } = useNavigation();
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	@use '@css/layout/footer';
 
 	// 추후 화면 연결 후 스타일 제거

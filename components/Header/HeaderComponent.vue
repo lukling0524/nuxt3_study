@@ -28,7 +28,7 @@
 
 <script setup>
 	import { ref, onMounted, onUnmounted } from 'vue';
-	import { useI18n } from 'vue-i18n';
+	//import { useI18n } from 'vue-i18n';
 	// import { useNavigation } from '@/utils/router';
 	// import SubHeader from '@/components/common/SubHeader.vue';
 
@@ -89,7 +89,7 @@
 
 	function setLocale(newLocale) {
 		locale.value = newLocale;
-		if (process.client) {
+		if (import.meta.env.SSR === false) {
 			localStorage.setItem('lang', newLocale);
 
 			// 언어 변경 시 html lang 속성값 변경

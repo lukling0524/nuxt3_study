@@ -34,7 +34,7 @@
 <script setup>
 	import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 	import { useRoute } from 'vue-router';
-	import { useI18n } from 'vue-i18n';
+	//import { useI18n } from 'vue-i18n';
 
 	const { goToMain, goToContact } = useNavigation();
 
@@ -86,7 +86,7 @@
 		}
 
 		// 클라이언트에서만 실행되도록
-		if (process.client) {
+    if (import.meta.env.SSR === false) {
 			document.body.style.overflow = isOpen.value ? 'hidden' : 'unset';
 		}
 	}
@@ -96,7 +96,7 @@
 		route,
 		() => {
 			isOpen.value = false;
-			if (process.client) {
+      if (import.meta.env.SSR === false) {
 				document.body.style.overflow = 'unset';
 			}
 		},

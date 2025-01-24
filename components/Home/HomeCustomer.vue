@@ -3,11 +3,23 @@
 		<h2 class="section__title text-center">{{ $t('MainCustomer.title') }}</h2>
 		<div class="box-area">
 			<div class="box-area__img">
-				<img class="img__original" :src="`/assets/images/img-main_features-${currentLang}.png`" :alt="$t('MainCustomer.alt')" />
+				<img class="img__original" :src="`/assets/images/img-main_features-${currentLang}.png`" :alt="t('MainCustomer.alt')" />
+				<!-- <nuxt-img
+					class="img__original"
+					:src="`/assets/images/img-main_features-${currentLang}.png`"
+					:fallback="`/assets/images/img-main_features-${currentLang}.png`"
+					format="avif"
+					:alt="$t('MainCustomer.alt')"
+					loading="lazy"
+				/> -->
 
-				<img id="obj1" class="img__obj" src="/assets/images/img-customer-obj-1.png" alt="face object" />
-				<img id="obj2" class="img__obj" src="/assets/images/img-customer-obj-2.png" alt="face object" />
-				<img id="obj3" class="img__obj" src="/assets/images/img-customer-obj-3.png" alt="face object" />
+				<nuxt-img id="obj1" class="img__obj" src="/assets/images/img-customer-obj-1.png" fallback="/assets/images/img-customer-obj-1.png" format="avif" alt="face object" loading="lazy" />
+				<nuxt-img id="obj2" class="img__obj" src="/assets/images/img-customer-obj-2.png" fallback="/assets/images/img-customer-obj-2.png" format="avif" alt="face object" loading="lazy" />
+				<nuxt-img id="obj3" class="img__obj" src="/assets/images/img-customer-obj-3.png" fallback="/assets/images/img-customer-obj-3.png" format="avif" alt="face object" loading="lazy" />
+
+				<!-- <nuxt-img id="card1" class="img__card" :src="`/assets/images/img-customer-card-1-${currentLang}.svg`" :fallback="`/assets/images/img-customer-card-1-${currentLang}.svg`" format="avif" :alt="$t('MainCustomer.alt')" loading="lazy" />
+        <nuxt-img id="card2" class="img__card" :src="`/assets/images/img-customer-card-2-${currentLang}.svg`" :fallback="`/assets/images/img-customer-card-2-${currentLang}.svg`" format="avif" :alt="$t('MainCustomer.alt')" loading="lazy" />
+        <nuxt-img id="card3" class="img__card" :src="`/assets/images/img-customer-card-3-${currentLang}.svg`" :fallback="`/assets/images/img-customer-card-3-${currentLang}.svg`" format="avif" :alt="$t('MainCustomer.alt')" loading="lazy" /> -->
 
 				<img id="card1" class="img__card" :src="`/assets/images/img-customer-card-1-${currentLang}.svg`" :alt="$t('MainCustomer.alt')" />
 				<img id="card2" class="img__card" :src="`/assets/images/img-customer-card-2-${currentLang}.svg`" :alt="$t('MainCustomer.alt')" />
@@ -92,6 +104,12 @@
 
 <style lang="scss" scoped>
 	$mobilePadding: 40px;
+
+	// gsap crs 처리를 위한 스타일
+	.section__title {
+
+		opacity: 0;
+	}
 
 	.section {
 		margin-top: $mainPageSectionSpace;
@@ -201,6 +219,7 @@
 		&__obj {
 			position: absolute;
 			z-index: 10;
+			opacity: 0;
 
 			@media (max-width: $minImgWidth) {
 				visibility: hidden;
@@ -209,6 +228,7 @@
 			&#obj1 {
 				top: rem(6px);
 				right: 0;
+				transform: translate(rem(-100px), rem(-70px));
 			}
 
 			&#obj2 {
@@ -225,6 +245,7 @@
 		&__card {
 			position: absolute;
 			padding-left: rem(32px);
+			opacity: 0;
 
 			@media (max-width: $minImgWidth) {
 				visibility: hidden;

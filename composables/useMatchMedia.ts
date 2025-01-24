@@ -6,7 +6,7 @@ export const useMatchMedia = () => {
 
 	// 상태 업데이트 함수
 	const checkScreen = () => {
-		if (process.client && window) {
+		if (import.meta.env.SSR === false && window) {
 			isDesktop.value = window.innerWidth >= 1100;
 		}
 	};

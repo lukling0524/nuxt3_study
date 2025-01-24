@@ -7,14 +7,13 @@
 
 <script setup>
 	import { onMounted, watch } from 'vue';
-	import { useI18n } from 'vue-i18n';
 
 	// import { matchMedia } from '@/utils/matchMedia';
 
 	const { t, locale } = useI18n();
 
 	function updateHtmlLang(newLocale) {
-		if (process.client) {
+		if (import.meta.env.SSR === false) {
 			document.documentElement.lang = newLocale;
 		}
 
@@ -34,7 +33,7 @@
 	// const { isDesktop } = matchMedia();
 
 	onMounted(() => {
-		if (process.client) {
+		if (import.meta.env.SSR === false) {
 			const savedLocale = localStorage.getItem('lang') || (navigator.language || navigator.userLanguage).substr(0, 2);
 			locale.value = savedLocale;
 			updateHtmlLang(savedLocale);

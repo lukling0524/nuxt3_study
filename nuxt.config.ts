@@ -19,11 +19,19 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	modules: ['@nuxtjs/i18n'],
+	modules: ['@nuxtjs/i18n', '@nuxt/image'],
 	i18n: {
 		compilation: {
 			strictMessage: false,
 		},
+		locales: ['en', 'ko'],
 		defaultLocale: 'ko',
 	},
+	nitro: {
+		compressPublicAssets: true,
+	},
+	image: {
+		format: ['webp', 'avif', 'jpeg', 'jpg', 'png', 'gif'],
+	},
+	plugins: ['@/plugins/gsap.client.js'],
 });
