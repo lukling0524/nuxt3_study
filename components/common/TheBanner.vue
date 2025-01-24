@@ -23,7 +23,7 @@
 	const { goToContact } = useNavigation();
 	const route = useRoute();
 	const { t } = useI18n();
-
+  const { $gsap, $ScrollTrigger } = useNuxtApp();
 	// gsap.registerPlugin(ScrollTrigger);
 
 	const initializeAnimation = () => {
