@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'url';
 
 export default defineNuxtConfig({
-	ssr: true,
+	ssr: false,
 	experimental: { appManifest: false },
 	compatibilityDate: '2025-01-14',
 	devtools: { enabled: true },
