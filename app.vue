@@ -1,4 +1,5 @@
 <template>
+	<SpeedInsights />
 	<NuxtLoadingIndicator />
 	<NuxtLayout>
 		<NuxtPage />
@@ -7,6 +8,7 @@
 
 <script setup>
 	import { onMounted, watch } from 'vue';
+	import { SpeedInsights } from '@vercel/speed-insights/nuxt';
 
 	// import { matchMedia } from '@/utils/matchMedia';
 
