@@ -13,13 +13,13 @@
 	const { t, locale } = useI18n();
 
 	function updateHtmlLang(newLocale) {
-    if (import.meta.env.SSR === false){
+		if (import.meta.env.SSR === false) {
 			document.documentElement.lang = newLocale;
 		}
 
 		useHead({
 			htmlAttrs: { lang: newLocale },
-			title: `${t('metaText.title')} SaaS WMS는 StockFlow`,
+			title: `${t('metaText.title')} 테스트`,
 			meta: [
 				{ name: 'description', content: t('metaText.description') },
 				{ name: 'keywords', content: t('metaText.keywords') },

@@ -35,16 +35,17 @@
 		header: 'product',
 		title: 'Product',
 		seoTitle: '제품소개',
+		mode: 'SSR',
 	});
 
 	const { t } = useI18n();
 	const route = useRoute();
 
 	useHead({
-		title: `${t('metaText.title')}${route.meta.title}`,
+		title: `${t('metaText.title')}${route.meta.mode}`,
 		meta: [
-			{ name: 'description', content: 'ssr test 루벤티스의 SaaS WMS, StockFlow 입니다.' },
-			{ property: 'og:title', content: `${t('metaText.title')}${route.meta.title}` },
+			{ name: 'description', content: '🚀🚀 SSR MODE 🚀🚀' },
+			{ name: 'keywords', content: '⭐,🔮,🎉,🚀,📋' },
 		],
 	});
 
