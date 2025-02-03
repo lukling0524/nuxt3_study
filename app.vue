@@ -23,9 +23,6 @@
 			meta: [
 				{ name: 'description', content: t('metaText.description') },
 				{ name: 'keywords', content: t('metaText.keywords') },
-				{ property: 'og:title', content: t('metaText.title') },
-				{ property: 'og:description', content: t('metaText.description') },
-				{ property: 'og:locale', content: t('metaText.og-locale') },
 			],
 		});
 	}
