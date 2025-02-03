@@ -43,7 +43,7 @@
 	useHead({
 		title: `${t('metaText.title')}${route.meta.title}`,
 		meta: [
-			{ name: 'description', content: '루벤티스의 SaaS WMS, StockFlow 입니다.' },
+			{ name: 'description', content: 'ssr test 루벤티스의 SaaS WMS, StockFlow 입니다.' },
 			{ property: 'og:title', content: `${t('metaText.title')}${route.meta.title}` },
 		],
 	});
