@@ -1,4 +1,5 @@
 import { fileURLToPath } from 'url';
+import imagemin from 'vite-plugin-imagemin';
 
 export default defineNuxtConfig({
 	ssr: true,
@@ -21,6 +22,14 @@ export default defineNuxtConfig({
 				},
 			},
 		},
+		plugins: [
+			imagemin({
+				mozjpeg: { quality: 80 },
+				pngquant: { quality: [0.7, 0.8], speed: 4 },
+				webp: { quality: 80 },
+				avif: { quality: 80 },
+			}),
+		],
 	},
 	modules: ['@nuxtjs/i18n', '@nuxt/image'],
 	i18n: {
@@ -34,7 +43,15 @@ export default defineNuxtConfig({
 		compressPublicAssets: true,
 	},
 	image: {
+		dir: 'public/assets/images',
+		provider: 'ipx',
 		format: ['webp', 'avif', 'jpeg', 'jpg', 'png', 'gif'],
+		screens: {
+			sm: 500,
+			md: 768,
+			lg: 1100,
+			xl: 1400,
+		},
 	},
 	plugins: ['@/plugins/gsap.client.js'],
 });

@@ -17,6 +17,7 @@
 		"gsap": "^3.12.7",
 		"nuxt": "^3.15.1",
 		"typescript": "^5.7.3",
+		"vite-plugin-imagemin": "^0.6.1",
 		"vue": "^3.4.21",
 		"vue-router": "^4.3.0"
 	},
