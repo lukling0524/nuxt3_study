@@ -8,7 +8,7 @@
 		<div class="main-visual__layer"></div>
 
 		<div class="section text-box">
-			<h1 v-if="isPageLoaded" class="text-box__title delayed-animation" v-html="t('mainVisual.title')"></h1>
+			<h1 v-if="isPageLoaded" class="text-box__title delayed-animation" >img opt branch</h1>
 			<p v-if="isPageLoaded" class="text-box__sub delayed-animation" v-html="t('mainVisual.sub')"></p>
 			<p v-if="isPageLoaded" class="text-box__desc delayed-animation">{{ t('mainVisual.desc') }}</p>
 		</div>
