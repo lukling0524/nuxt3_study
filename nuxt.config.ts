@@ -43,8 +43,8 @@ export default defineNuxtConfig({
 		compressPublicAssets: true,
 	},
 	image: {
-		dir: 'public/assets/images',
-		provider: 'ipx',
+		// dir: 'public/assets/images',
+		// provider: 'ipx',
 		format: ['webp', 'avif', 'jpeg', 'jpg', 'png', 'gif'],
 		screens: {
 			sm: 500,

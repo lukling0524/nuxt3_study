@@ -4,7 +4,8 @@
 		<ul class="functions">
 			<li :id="`function_${idx + 1}`" class="functions__wrap" v-for="(item, idx) in functions" :key="idx">
 				<div class="functions__img">
-					<nuxt-img :src="`/assets/images/img-main_func-0${idx + 1}.png`" :fallback="`/assets/images/img-main_func-0${idx + 1}.png`" format="avif" :alt="item.title" loading="lazy" />
+					<!-- <nuxt-img :src="`/assets/images/img-main_func-0${idx + 1}.png`" :fallback="`/assets/images/img-main_func-0${idx + 1}.png`" format="avif" :alt="item.title" loading="lazy" /> -->
+					<ImageOptimize :src="`img-main_func-0${idx + 1}`" :alt="item.title" />
 				</div>
 				<div class="functions__text">
 					<div class="functions__title">
@@ -24,6 +25,7 @@
 	import { computed, onMounted } from 'vue';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import ImageOptimize from '../common/ImageOptimize.vue';
 	// import ButtonComponent from '@/components/common/ButtonComponent.vue';
 	// import { useI18n } from 'vue-i18n';
 	// import { useNavigation } from '@/utils/router';
