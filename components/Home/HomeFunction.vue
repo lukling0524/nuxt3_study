@@ -5,7 +5,7 @@
 			<li :id="`function_${idx + 1}`" class="functions__wrap" v-for="(item, idx) in functions" :key="idx">
 				<div class="functions__img">
 					<!-- <nuxt-img :src="`/assets/images/img-main_func-0${idx + 1}.png`" :fallback="`/assets/images/img-main_func-0${idx + 1}.png`" format="avif" :alt="item.title" loading="lazy" /> -->
-					<ImageOptimize :src="`img-main_func-0${idx + 1}`" :alt="item.title" />
+					<ImageOptimize :src="`img-main_func-0${idx + 1}.png`" :alt="item.title" />
 				</div>
 				<div class="functions__text">
 					<div class="functions__title">

@@ -1,6 +1,6 @@
 <template>
 	<div class="banner">
-		<nuxt-img src="/assets/images/bg-banner.webp" format="webp" loading="lazy" class="banner__background" alt="Banner background" />
+		<ImageOptimize class="banner__background" src="bg-banner.webp" alt="Banner background" />
 
 		<div class="banner__text">
 			<h2 class="banner__title" v-html="t('banner.title')"></h2>
@@ -19,11 +19,12 @@
 	import { useI18n } from 'vue-i18n';
 	import { useRoute } from 'vue-router';
 	import { useNavigation } from '@/composables/router';
+	import ImageOptimize from './ImageOptimize.vue';
 
 	const { goToContact } = useNavigation();
 	const route = useRoute();
 	const { t } = useI18n();
-  const { $gsap, $ScrollTrigger } = useNuxtApp();
+	const { $gsap, $ScrollTrigger } = useNuxtApp();
 	// gsap.registerPlugin(ScrollTrigger);
 
 	const initializeAnimation = () => {
