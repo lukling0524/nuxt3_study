@@ -12,6 +12,7 @@
 					:alt="$t('MainCustomer.alt')"
 					loading="lazy"
 				/> -->
+				<!-- test -->
 
 				<nuxt-img id="obj1" class="img__obj" src="/assets/images/img-customer-obj-1.png" fallback="/assets/images/img-customer-obj-1.png" format="avif" alt="face object" loading="lazy" />
 				<nuxt-img id="obj2" class="img__obj" src="/assets/images/img-customer-obj-2.png" fallback="/assets/images/img-customer-obj-2.png" format="avif" alt="face object" loading="lazy" />
@@ -107,7 +108,6 @@
 
 	// gsap crs 처리를 위한 스타일
 	.section__title {
-
 		opacity: 0;
 	}
 
