@@ -14,7 +14,8 @@
 					</div>
 					<h4 class="functions__sub">{{ item.sub }}</h4>
 					<p class="functions__desc">{{ item.desc }}</p>
-					<CommonButton class="btn-more" label="view more" @click="item.path" />
+					<CommonButton id="btn" label="view more" @click="item.path" />
+					<CommonButton to="/custom" class="btn-more" color="white" label="A태그" @click="item.path" />
 				</div>
 			</li>
 		</ul>

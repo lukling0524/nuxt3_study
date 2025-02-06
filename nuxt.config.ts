@@ -2,7 +2,7 @@ import { fileURLToPath } from 'url';
 // import imagemin from 'vite-plugin-imagemin';
 
 export default defineNuxtConfig({
-	ssr: true,
+	// ssr: true,
 	experimental: { appManifest: false },
 	compatibilityDate: '2025-01-14',
 	devtools: { enabled: true },

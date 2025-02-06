@@ -39,20 +39,23 @@
 
 <script setup>
 	import { computed, onMounted } from 'vue';
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	// import { gsap } from 'gsap';
+	// import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	// import { useI18n } from 'vue-i18n';
 	// import { useNavigation } from '@/utils/router';
 	// const { goToCustomer } = useNavigation();
 	//
+
+  const { $gsap, $ScrollTrigger } = useNuxtApp();
+
 	const { locale, t } = useI18n();
 	const currentLang = computed(() => (locale.value === 'ko' ? 'ko' : 'en'));
 
-	gsap.registerPlugin(ScrollTrigger);
+	// gsap.registerPlugin(ScrollTrigger);
 
 	onMounted(() => {
 		// title: 고객 성공 사례
-		gsap
+		$gsap
 			.timeline({
 				scrollTrigger: {
 					trigger: '#customer',
@@ -70,7 +73,7 @@
 		const cardEase = 'power4.in';
 		const cardDuration = 0.8;
 
-		gsap
+		$gsap
 			.timeline({
 				scrollTrigger: {
 					trigger: '.img__original',
@@ -88,7 +91,7 @@
 			.fromTo('#customer #card1', { y: 20, opacity: 0, ease: cardEase }, { y: 0, opacity: 1, duration: cardDuration }, 'queue+=0.2');
 
 		// 고객 성공 사례 box 내부 컨텐츠
-		gsap
+		$gsap
 			.timeline({
 				scrollTrigger: {
 					trigger: '.section__title ',
