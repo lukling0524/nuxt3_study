@@ -19,39 +19,25 @@
 </template>
 
 <script lang="ts" setup>
-	const props = defineProps({
-		to: {
-			type: String,
-			default: undefined,
-		},
-		type: {
-			type: String as PropType<'button' | 'submit' | 'reset'>,
-			default: 'button',
-		},
-		id: {
-			type: String,
-			default: undefined,
-		},
-		color: {
-			type: String as PropType<'blue' | 'white' | 'navy'>,
-			default: 'navy',
-		},
-		customClass: {
-			type: String,
-			default: undefined,
-		},
-		size: {
-			type: String as PropType<'lg'>,
-			default: undefined,
-		},
-		label: {
-			type: String,
-			required: true,
-		},
-		disabled: {
-			type: Boolean,
-			default: false,
-		},
+	type ButtonColor = 'blue' | 'white' | 'navy';
+	type ButtonType = 'button' | 'submit' | 'reset';
+	type ButtonSize = 'lg';
+
+	interface ButtonProps {
+		to?: string;
+		type?: ButtonType;
+		id?: string;
+		color?: ButtonColor;
+		customClass?: string;
+		size?: ButtonSize;
+		label: string; // required
+		disabled?: boolean;
+	}
+
+	const props = withDefaults(defineProps<ButtonProps>(), {
+		type: 'button',
+		color: 'navy',
+		disabled: false,
 	});
 
 	const componentType = computed(() => (props.to ? resolveComponent('NuxtLink') : 'button'));

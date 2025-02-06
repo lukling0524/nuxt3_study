@@ -4,7 +4,6 @@
 		<ul class="functions">
 			<li :id="`function_${idx + 1}`" class="functions__wrap" v-for="(item, idx) in functions" :key="idx">
 				<div class="functions__img">
-					<!-- <nuxt-img :src="`/assets/images/img-main_func-0${idx + 1}.png`" :fallback="`/assets/images/img-main_func-0${idx + 1}.png`" format="avif" :alt="item.title" loading="lazy" /> -->
 					<ImageOptimize :src="`img-main_func-0${idx + 1}.png`" :alt="item.title" />
 				</div>
 				<div class="functions__text">
@@ -14,8 +13,8 @@
 					</div>
 					<h4 class="functions__sub">{{ item.sub }}</h4>
 					<p class="functions__desc">{{ item.desc }}</p>
-					<CommonButton id="btn" label="view more" @click="item.path" />
-					<CommonButton to="/custom" class="btn-more" color="white" label="A태그" @click="item.path" />
+					<CommonButton id="btn" label="버튼태그" />
+					<CommonButton to="/#" class="btn-more" color="blue" label="AA앵커태그" />
 				</div>
 			</li>
 		</ul>
@@ -24,61 +23,8 @@
 
 <script setup>
 	import { computed, onMounted } from 'vue';
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-	import ImageOptimize from '../common/ImageOptimize.vue';
-	// import ButtonComponent from '@/components/common/ButtonComponent.vue';
-	// import { useI18n } from 'vue-i18n';
-	// import { useNavigation } from '@/utils/router';
-	// const { goToReceive, goToInventory, goToOrder, goToShipping } = useNavigation();
 
 	const { t } = useI18n();
-
-	gsap.registerPlugin(ScrollTrigger);
-
-	onMounted(() => {
-		// title: StockFlow의 주요 기능
-		gsap
-			.timeline({
-				scrollTrigger: {
-					trigger: '#function',
-					start: 'top 80%',
-					markers: false,
-					invalidateOnRefresh: true,
-				},
-			})
-			.fromTo('#function .section__title', { y: 20, opacity: 0, ease: 'power2.inOut' }, { y: 0, opacity: 1 });
-
-		// 주요기능 컨텐츠
-		const posX = -20;
-		const ease = 'power1.in';
-		const queue = 0.1;
-
-		function createTextAnimation(triggerEl) {
-			return gsap
-				.timeline({
-					scrollTrigger: {
-						trigger: triggerEl,
-						start: 'top 80%',
-						end: 'bottom bottom',
-						markers: false,
-						invalidateOnRefresh: true,
-					},
-				})
-				.fromTo(`${triggerEl} .functions__img`, { opacity: 0, ease: ease }, { opacity: 1, duration: 1.3 }, 'queue')
-				.fromTo(`${triggerEl} .functions__title`, { x: posX, opacity: 0, ease: ease }, { x: 0, opacity: 1, duration: 0.8 }, 'queue')
-				.fromTo(`${triggerEl} .functions__sub`, { x: posX, opacity: 0, ease: ease }, { x: 0, opacity: 1, duration: 0.8 }, `queue+=${queue}`)
-				.fromTo(`${triggerEl} .functions__desc`, { x: posX, opacity: 0, ease: ease }, { x: 0, opacity: 1, duration: 0.8 }, `queue+=${queue * 2}`)
-				.fromTo(`${triggerEl} .btn-more`, { x: posX, opacity: 0, ease: ease }, { x: 0, opacity: 1, duration: 0.8 }, 'queue');
-		}
-
-		const functionMainFuncs = [];
-
-		// functions 개수만큼 반복 출력
-		for (let i = 1; i <= functions.value.length; i++) {
-			functionMainFuncs.push(createTextAnimation(`#function_${i}`));
-		}
-	});
 
 	const functions = computed(() => [
 		{
